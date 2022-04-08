@@ -1,0 +1,81 @@
+{% load market_filters %}
+<!-- component -->
+<div class="w-full h-full p-2 bg-white shadow-lg rounded overflow-hidden">
+	<div class="flex flex-row gap-2">
+		<div class="w-fit rounded border-2 border-gray-300 p-4">
+			<svg xmlns="http://www.w3.org/2000/svg" class="h-64 w-64 text-blue-600" fill="none" viewBox="0 0 24 24"
+				stroke="currentColor" stroke-width="0.3">
+				<path stroke-linecap="round" stroke-linejoin="round"
+					d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+			</svg>
+			<div class="text-center drop-shadow text-green-900 font-bold">@{{user.username}}</div>
+			<div class="text-center drop-shadow font-medium">{{user|fullname}}</div>
+			<div class="text-sm flex flex-row justify-between"><strong>Email: </strong>
+				<div> {{user.email}}</div>
+			</div>
+			<div class="text-sm flex flex-row justify-between"><strong>Is Active: </strong>
+				<div class="text-right">{{user.is_active}}</div>
+			</div>
+			<div class="text-sm flex flex-row justify-between"><strong>Is Staff: </strong>
+				<div class="text-right">{{user.is_staff}}</div>
+			</div>
+			<div class="text-sm flex flex-row justify-between"><strong>Is Admin: </strong>
+				<div class="text-right">{{user.is_superuser}}</div>
+			</div>
+			<div class="text-sm flex flex-row justify-between"><strong>Last Login: </strong>
+				<div class="text-right">{{user.last_login|date:'d-m-Y h:i:s A'}}</div>
+			</div>
+			<div class="text-sm flex flex-row justify-between"><strong>Date Joined: </strong>
+				<div class="text-right">{{user.date_joined|date:'d-m-Y h:i:s A'}}</div>
+			</div>
+		</div>
+		<div class="flex flex-col">
+			<div class="p-2 flex flex-row">
+				<strong>Profile Information</strong>
+			</div>
+			<div class="flex flex-row h-fit p-2 gap-y-2 flex-wrap w-full rounded border-2 border-gray-300 ">
+				<div class="basis-2/4">
+					<strong>Firstname</strong>
+					<input type="text" class="p-2 w-4/6" name="first_name" value="{{user.first_name}}" />
+				</div>
+				<div class="basis-2/4">
+					<strong>Lastname</strong>
+					<input type="text" class="p-2 w-4/6" name="last_name" value="{{user.last_name}}" />
+				</div>
+				<div class="basis-2/4">
+					<strong>Username</strong>
+					<input type="text" class="p-2 w-4/6" name="username" value="{{user.username}}" />
+				</div>
+				<div class="basis-2/4">
+					<strong>Email</strong>
+					<input type="email" class="p-2 w-4/6" name="email" value="{{user.email}}" />
+				</div>
+				<div class="basis-2/4">
+					<strong>Active Status</strong>
+					<input type="checkbox" onclick="return false;"
+						class="m-2 p-2 w-4 h-4 rounded-md border-0 focus:ring-0 text-green-600" name="is_active"
+						value="{{ True }}" checked="{{user.is_active|check:True}}" onchange="checkboxHandle(this)" />
+				</div>
+				<div class="basis-2/4">
+					<strong>Staff Status</strong>
+					<input type="checkbox" onclick="return false;"
+						class="m-2 p-2 w-4 h-4 rounded-md border-0 focus:ring-0 text-green-600" name="is_staff"
+						value="{{ True }}" checked="{{user.is_staff|check:True}}" onchange="checkboxHandle(this)" />
+				</div>
+				<div class="basis-2/4">
+					<strong>Date Joined</strong>
+					<input type="text" class="p-2 w-4/6" readonly name="date_joined"
+						value="{{user.date_joined|date:'d-M-Y h:m:s A'}}">
+				</div>
+				<div class="basis-2/4">
+					<strong>Last Login</strong>
+					<input type="text" class="p-2 w-4/6" readonly name="last_login"
+						value="{{user.last_login|date:'d-M-Y h:m:s A'}}">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	const checkboxHandle = e => e.value = e.checked;
+</script>

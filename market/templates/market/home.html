@@ -1,0 +1,11 @@
+{% extends "market/layout.html" %}
+{% load market_filters %}
+{% block title %}Profile{% endblock title %}
+{% block sidebar %}
+  {% for menu in navmenu %}
+  <div class="p-2 border-b-2 border-gray-300 hover:bg-stone-100 rounded-md {{menu|active_class}}">{{menu}}</div>
+  {% endfor %}
+{% endblock sidebar %}
+{% block main %}
+  {% include "market/profilecard.html" %}
+{% endblock main %}
